@@ -2,7 +2,6 @@ const Discord = require('discord.js')
 const bot = new Discord.Client()
 
 const token = process.env.bot_token
-const prefix = process.env.bot_prefix
 
 bot.on('ready', () => console.log('Bot online'))
 
@@ -22,25 +21,15 @@ bot.on("presenceUpdate", (oldMember, newMember) => {
 
 	if(newMember.user.presence.game && newMember.user.presence.game.name === "Counter-Strike: Global Offensive"){
 		newMember.addRole(playRole)
-	}else if(!newMember.user.presence.game && newMember.roles.has(playRole.id)){
+	} else if (!newMember.user.presence.game && newMember.roles.has(playRole.id)) {
 		newMember.removeRole(playRole)
 	}
 })
 
 bot.on('message', message => {
 	if(message.author.bot) return
-	if(!message.content.startsWith(prefix)) return
 
-	const command = message.content.split(" ")[0]
-		  command = command.slice(config.prefix.length)
-	const args = message.content.split(" ").slice(1)
-
-	if(command === "add"){
-		const numArray = args.map(n => parseInt(n))
-		const total = numArray.reduce((p,c) => p+c)
-
-		message.channel.sendMessage(total)
-	}
+	const command = message.content;
 
 	if(command === "help") return message.author.sendMessage("!kick @name, !add 2 3")
 	if(command === "jenaye") return message.author.sendMessage("http://jenaye.fr/ phone : 06 61 27 14 23")
