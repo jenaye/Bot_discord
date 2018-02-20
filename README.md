@@ -6,7 +6,6 @@ Small bot to test library discordjs
 
 ```
 git clone https://github.com/jenaye/Bot_discord
-cp .env.dist .env
 npm i
 ```
 
